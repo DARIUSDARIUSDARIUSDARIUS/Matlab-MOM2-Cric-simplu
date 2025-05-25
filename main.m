@@ -8,17 +8,17 @@ D1 = 21; % mm
 D4 = 26.5; % mm
 gamma = 1.3;
 P = 5; % mm
-forta_muncitor = 125; % newtoni
+forta_muncitor = 125; % N
 coef_frecare = 0.2; % otel pe fonta
 tensiune_admisibila_beton = 2.5; % MPa
 
-% Define aliaj (material alloy)
+% Definire aliaj
 aliaj = 'OL50';
 
-% Get material properties
+% proprietati material pentru functii
 [~, ~, ~, limita_curgere, limita_rupere] = functie_switch_aliaje(aliaj);
 
-% Call autofix to get M12
+% Scoatem M12 pentru dim_parghie
 [~, ~, M12, ~, ~, ~, ~] = autofix(P, d2, coef_frecare, F, d3, limita_curgere);
 
 
@@ -30,12 +30,12 @@ disp(['M12 calculated by autofix: ', num2str(M12_calc)]);
 disp(['Mtot calculated by dim_parghie: ', num2str(Mtot_calc)]);
 
 
-% Calculate randament_total after Mtot is obtained
+% Calculare randament total
 randament_total = (F*P)/(Mtot_calc * 2 * pi);
 disp(['Total efficiency (randament_total): ', num2str(randament_total)]);
 
 
-% Other function calls you might want to include:
+% D3 calculat (se alege un numar mai mare ulterior din tabelul dat)
 d3_calculated = dimensionare(aliaj,F,gamma);
 disp(['Calculated d3: ', num2str(d3_calculated)]);
 
@@ -48,6 +48,5 @@ disp(['Number of threads calculated: ', num2str(nr_spire_calc)]);
 [lambda,cfj,imin,Imin,A,Ff] = flambaj(H,d3,F,aliaj);
 disp(['Buckling safety coefficient (cfj): ', num2str(cfj)]);
 
-% For dim_baza, Din is needed. It's an output of dim_piulita.
 [Dbi_base,Dbe_base] = dim_baza(H,F,tensiune_admisibila_beton,Din_nut);
 disp(['Base outer diameter (Dbe_base): ', num2str(Dbe_base)]);
