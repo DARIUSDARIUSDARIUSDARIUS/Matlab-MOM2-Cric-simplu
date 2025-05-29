@@ -1,6 +1,6 @@
 function [Tt,Wt,hc,Mi,M14,dc,Dc,Dc_prim,dc_prim,Mtot] = dim_parghie(M12,d3,F,tensiune_admisibila_beton,coef_frecare,forta_muncitor)
 aliaj = 'OL42';
-dc_prim = d3+2;
+dc_prim = d3;
 Dc_prim = round(sqrt(dc_prim + (F * 4) / (pi * tensiune_admisibila_beton ) ));
 dc = dc_prim + 2;
 Dc = Dc_prim + 2;

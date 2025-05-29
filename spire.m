@@ -1,4 +1,4 @@
-function [nr_spire_calculat,nr_spire,li,A_filet,W,solicitare_incovoiere,solicitare_forfecare,tensiunea_echivalenta,tensiune_admisibila] = spire(P,aliaj,F,d,D1,H,D4)
+function [nr_spire_calculat,nr_spire,li,A_filet,W,solicitare_incovoiere,solicitare_forfecare,tensiunea_echivalenta,tensiune_admisibila] = spire(P,aliaj,F,d,D1,~,D4)
 Km = mean(linspace(0.55,0.75,10)); % coeficient de corectie
 
 if P<2
@@ -11,14 +11,14 @@ elseif P>12
     ac = 1;
 end
 
-limita_curgere = functie_switch_aliaje(aliaj);
+[~,~,~,limita_curgere] = functie_switch_aliaje(aliaj);
 presiune_admisibila = mean(5:15);
 nr_spire_calculat = F/((pi/4) * (d^2-D1^2) * presiune_admisibila);
 nr_spire = round(nr_spire_calculat + 1);
 
-li = (H/2) * ac;
+li = ((P/2)/2) + ac;
 A_filet = pi * D4 * ((P/2) + 2 * li * tan(deg2rad(15)));
-W = (pi * D4 * ((P/2) + 2 * li * tan(deg2rad(15)))^2) / 6;
+W = (pi * D4 * ((P/2) + 2 * li * tan(deg2rad(15)) )^2) / 6;
 
 solicitare_incovoiere = ((F/nr_spire)*li)/W;
 solicitare_forfecare = (F/(Km*nr_spire))/A_filet;
