@@ -28,7 +28,7 @@ disp(['M12 calculated by autofix: ', num2str(M12_calc)]);
 disp(rad2deg(phi))
 disp(rad2deg(psi))
 
-[Tt,Wt,hc,Mi,M14,dc,Dc,Dc_prim,dc_prim,Mtot_calc] = dim_parghie(d3,F,tensiune_admisibila_beton,coef_frecare,forta_muncitor,M12_calc);
+[Tt,Wt,hc,Mi,M14,dc,Dc,Dc_prim,dc_prim,Mtot_calc] = dim_parghie(M12_calc, d3, F, tensiune_admisibila_beton, coef_frecare, forta_muncitor);
 disp(['Mtot calculated by dim_parghie: ', num2str(Mtot_calc)]);
 
 
