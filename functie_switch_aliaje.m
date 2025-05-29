@@ -21,4 +21,7 @@ switch aliaj
     case 'FC300'
         limita_rupere = 300;
         a=0;
+        b=0;
+        limita_curgere = 0;
+        lambda0 = 0;
 end

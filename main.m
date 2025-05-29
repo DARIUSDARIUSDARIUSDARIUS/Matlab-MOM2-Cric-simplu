@@ -28,7 +28,7 @@ disp(['M12 calculated by autofix: ', num2str(M12_calc)]);
 disp(rad2deg(phi))
 disp(rad2deg(psi))
 
-[Tt,Wt,hc,Mi,M14,dc,Dc,Dc_prim,dc_prim,Mtot_calc] = dim_parghie(M12_calc, d3, F, tensiune_admisibila_beton, coef_frecare, forta_muncitor);
+[Tt,Wt,hc,Mi,M14,dc,Dc,Dc_prim,dc_prim,Mtot_calc,randament,Lc,dp_prim] = dim_parghie(M12_calc, d3, F, tensiune_admisibila_beton, coef_frecare, forta_muncitor);
 disp(['Mtot calculated by dim_parghie: ', num2str(Mtot_calc)]);
 
 
@@ -41,11 +41,11 @@ disp(['Total efficiency (randament_total): ', num2str(randament_total)]);
 d3_calculated = dimensionare(aliaj,F,gamma);
 disp(['Calculated d3: ', num2str(d3_calculated)]);
 
-[Dbe_nut,Dbi_nut,Din_nut,hg,Hp,Dg,Dg_prim,Dg_prim_min,De_prim,De,De_min] = dim_piulita(H,gamma,F,limita_rupere,D4,P);
-disp(['Nut outer diameter (Dbe_nut): ', num2str(Dbe_nut)]);
-
 [nr_spire_calc,nr_spire_round,li,A_filet,W,sol_incov,sol_forf,tens_echiv_spire,tens_admis_spire] = spire(P,aliaj,F,d,D1,H,D4);
 disp(['Number of threads calculated: ', num2str(nr_spire_calc)]);
+
+[Dbe_nut,Dbi_nut,Din_nut,hg,Hp,Dg,Dg_prim,Dg_prim_min,De_prim,De,De_min] = dim_piulita(H,gamma,F,D4,P,nr_spire_round);
+disp(['Nut outer diameter (Dbe_nut): ', num2str(Dbe_nut)]);
 
 [lambda,cfj,imin,Imin,A,Ff] = flambaj(H,d3,F,aliaj);
 disp(['Buckling safety coefficient (cfj): ', num2str(cfj)]);
